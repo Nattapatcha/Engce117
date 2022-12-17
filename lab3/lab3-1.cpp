@@ -1,7 +1,7 @@
 #include <stdio.h>
-struct People {             // Structure declaration
-  int Amount;         // Member (int variable)
-  char Countryname[];   // Member (string variable)
+struct People {             
+  int Amount;         
+  
 };
 typedef struct People Q;
 
