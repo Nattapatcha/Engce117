@@ -1,5 +1,5 @@
 //นาย ณัฐภัทร เจริญกิจหัตถกร 65543206011-0 Sec2
-
+//https://youtu.be/EeI9JW2Yhgw
 #include <stdio.h>
 #include <string.h>
 struct Asiankid
