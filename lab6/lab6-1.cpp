@@ -11,7 +11,7 @@ struct studentNode *back ;
 } ;
 struct studentNode *AddNode( struct studentNode **startNode, char n[], int a, char s, float g ); // prototype
 void InsNode( struct studentNode *preNode, char n[], int a, char s, float g); // prototype
-void DelNode( struct studentNode **now);// prototype
+void DelNode( struct studentNode *now);// prototype
 void GoBack( struct studentNode **now);// prototype
 void ShowAll( struct studentNode *walk ) ;
 
@@ -23,7 +23,7 @@ now = AddNode( &start, "two", 8, 'F', 3.22 ) ; ShowAll( start ) ;
 InsNode( now, "three", 10, 'M', 3.33 ) ; ShowAll( start ) ;
 InsNode( now, "four", 12, 'F', 3.44 ) ; ShowAll( start ) ;
 GoBack( &now ) ;
-// DelNode( now ) ; ShowAll( start ) ;
+DelNode( now ) ; ShowAll( start ) ;
 // DelNode( now ) ; ShowAll( start ) ;
 // DelNode( now ) ; ShowAll( start ) ;
 return 0 ;
@@ -66,4 +66,12 @@ void InsNode( struct studentNode *preNode, char n[], int a, char s, float g){
 void GoBack(struct studentNode **now){
     (*now) = (*now)->back;
 
+}
+void DelNode( struct studentNode *now){
+    struct studentNode *temp;
+    now->back->next = now->next;
+    now->next->back = now->back;
+    temp = now->next;
+    delete now;
+    now = temp;
 }
