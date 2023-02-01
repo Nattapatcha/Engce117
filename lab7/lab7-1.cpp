@@ -8,27 +8,27 @@ struct studentNode
     char sex;
     float gpa;
 };
+
 class LinkedList
 {
 protected:
     struct studentNode *start, **now;
 
 public:
-    LinkedList();                                   // กำหนดค่าเริ่มต้นของ start และ now
-    ~LinkedList();                                  // คืนหน่วยความจำที่จองไว้ในลิงค์ลิสต์ทุกโหนด
-    void InsNode(char n[], int a, char s, float g); // แทรกโหนดใหม่อยู่ก่อนโหนดปัจจุบัน
-    void InsertNode(char n[], int a, char s, float g); // แทรกโหนดใหม่อยู่ก่อนโหนดปัจจุบัน
-    void DelNode();                                 // ลบโหนดปัจจุบัน
-    int GoNext();                                       // เปลี่ยนโหนดปัจจุบันไปชี้ที่โหนดถัดไป
-    virtual void ShowNode();                        // แสดงข้อมูลในโหนดปัจจุบัน
+    LinkedList();                                   // à¸à¸³à¸«à¸™à¸”à¸„à¹ˆà¸²à¹€à¸£à¸´à¹ˆà¸¡à¸•à¹‰à¸™à¸‚à¸­à¸‡ start à¹à¸¥à¸° now
+    ~LinkedList();                                  // à¸„à¸·à¸™à¸«à¸™à¹ˆà¸§à¸¢à¸„à¸§à¸²à¸¡à¸ˆà¸³à¸—à¸µà¹ˆà¸ˆà¸­à¸‡à¹„à¸§à¹‰à¹ƒà¸™à¸¥à¸´à¸‡à¸„à¹Œà¸¥à¸´à¸ªà¸•à¹Œà¸—à¸¸à¸à¹‚à¸«à¸™à¸”
+    void InsNode(char n[], int a, char s, float g); // à¹à¸—à¸£à¸à¹‚à¸«à¸™à¸”à¹ƒà¸«à¸¡à¹ˆà¸­à¸¢à¸¹à¹ˆà¸à¹ˆà¸­à¸™à¹‚à¸«à¸™à¸”à¸›à¸±à¸ˆà¸ˆà¸¸à¸šà¸±à¸™
+    void DelNode();                                 // à¸¥à¸šà¹‚à¸«à¸™à¸”à¸›à¸±à¸ˆà¸ˆà¸¸à¸šà¸±à¸™
+    GoNext();                                       // à¹€à¸›à¸¥à¸µà¹ˆà¸¢à¸™à¹‚à¸«à¸™à¸”à¸›à¸±à¸ˆà¸ˆà¸¸à¸šà¸±à¸™à¹„à¸›à¸Šà¸µà¹‰à¸—à¸µà¹ˆà¹‚à¸«à¸™à¸”à¸–à¸±à¸”à¹„à¸›
+    virtual void ShowNode();                        // à¹à¸ªà¸”à¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹ƒà¸™à¹‚à¸«à¸™à¸”à¸›à¸±à¸ˆà¸ˆà¸¸à¸šà¸±à¸™
 };                                                  // end class
 
 class NewList : public LinkedList
 {
-    public :
-    int GoFirst();                  // เปลี่ยนโหนดปัจจุบันไปชี้ที่โหนดเริ่มต้น
-    virtual void ShowNode(); // แสดงข้อมูลในทุกโหนดตั้งแต่เริ่มต้นถึงสุดท้าย
-};                             // end class
+public:
+    GoFirst();               // à¹€à¸›à¸¥à¸µà¹ˆà¸¢à¸™à¹‚à¸«à¸™à¸”à¸›à¸±à¸ˆà¸ˆà¸¸à¸šà¸±à¸™à¹„à¸›à¸Šà¸µà¹‰à¸—à¸µà¹ˆà¹‚à¸«à¸™à¸”à¹€à¸£à¸´à¹ˆà¸¡à¸•à¹‰à¸™
+    virtual void ShowNode(); // à¹à¸ªà¸”à¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹ƒà¸™à¸—à¸¸à¸à¹‚à¸«à¸™à¸”à¸•à¸±à¹‰à¸‡à¹à¸•à¹ˆà¹€à¸£à¸´à¹ˆà¸¡à¸•à¹‰à¸™à¸–à¸¶à¸‡à¸ªà¸¸à¸”à¸—à¹‰à¸²à¸¢
+};                           // end class
 
 int main()
 {
@@ -58,12 +58,46 @@ int main()
 
     return 0;
 } // end function
-struct studentNode *AddNode( struct studentNode **startNode, char n[], int a, char s, float g ){
-    struct studentNode *temp = NULL;
-    *startNode = new struct studentNode;
-    strcpy((*startNode)->name, n);
-    (*startNode)->age = a;
-    (*startNode)->sex = s;
-    (*startNode)->gpa = g;
-    return *startNode;
+
+void LinkedList::InsNode( char n[], int a, char s, float g ) {
+  struct studentNode *temp = new studentNode ;
+  strcpy( temp->name, n ) ;
+  temp->age = a ;
+  temp->sex = s ;
+  temp->gpa = g ;
+
+  temp->next = *now ;
+  *now = temp ;
+}
+
+void LinkedList::DelNode() {
+  struct studentNode *temp = *now ;
+  *now = (*now)->next ;
+  delete temp ;
+}
+
+void LinkedList::GoNext() {
+  now = &((*now)->next) ;
+}
+
+void LinkedList::ShowNode() {
+  cout << "Name : " << (*now)->name << endl ;
+  cout << "Age : " << (*now)->age << endl ;
+  cout << "Sex : " << (*now)->sex << endl ;
+  cout << "GPA : " << (*now)->gpa << endl ;
+}
+
+void NewList::GoFirst() {
+  now = &start ;
+}
+
+void NewList::ShowNode() {
+  GoFirst() ;
+  while ( *now != NULL ) {
+    cout << "Name : " << (*now)->name << endl ;
+    cout << "Age : " << (*now)->age << endl ;
+    cout << "Sex : " << (*now)->sex << endl ;
+    cout << "GPA : " << (*now)->gpa << endl ;
+    GoNext() ;
+  }
 }
