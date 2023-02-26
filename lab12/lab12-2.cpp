@@ -14,20 +14,20 @@ int main()
 } // end function
 
 int *KnapsackGreedy(int *w, int *v, int n, int wx){
-    int i, weight;
+    int i, j, weight;
+    int *sum = new int;
     int *x = new int;
-    for(i = 0 ; i < n-1 ; i++){
+    for(i = 0 ; i < n ; i++){
         x[i] = 0;
-    } // end loop
+        
+    }
     weight = 0;
-
-    while( weight < wx && i != -1){
+    for(i = 0 ; i < n ; i++){
+        sum[i] = (v[i] / w[i]);
         if( (weight + w[i]) <= wx ){
             x[i] = 1;
             weight += w[i];
         }
-        i--;
-        
-    } // end loop
+    }
     return x;
-} // end function
+}
